@@ -26,6 +26,22 @@ app.post("/registrar", async (req, res) => {
   }
 });
 
+// Rota de Login (Simples para a apresentação)
+app.post("/login", async (req, res) => {
+  const { email, senha } = req.body;
+  const db = await setupDatabase();
+  const user = await db.get(
+    "SELECT * FROM usuarios WHERE email = ? AND senha = ?",
+    [email, senha],
+  );
+
+  if (user) {
+    res.json({ success: true, userId: user.id });
+  } else {
+    res.status(401).json({ error: "E-mail ou senha incorretos" });
+  }
+});
+
 // ROTA PARA CATEGORIAS
 app.post("/categorias", async (req, res) => {
   try {
