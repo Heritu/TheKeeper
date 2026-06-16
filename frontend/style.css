@@ -1,0 +1,206 @@
+/* Importando a fonte estilo 8-bits */
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+:root {
+  /* Paleta de Cores Retrô - Foco em Finanças */
+  --bg-color: #2b2b2b; /* Fundo geral escuro para destacar os blocos brancos */
+  --card-bg: #ffffff; /* Fundo das áreas de informação */
+  --text-main: #000000; /* Texto principal */
+  --border-dark: #000000; /* Bordas grossas */
+
+  /* Cores de Destaque */
+  --money-green: #4caf50; /* Para saldo e entradas */
+  --expense-red: #f44336; /* Para saídas e despesas */
+  --action-color: #ffcc00; /* Amarelo para botões de ação principal */
+  --light-gray: #f0f0f0; /* Fundo de itens da lista */
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: "Press Start 2P", cursive;
+  margin: 0;
+  height: 100vh;
+  /* overflow: hidden; (Removido para permitir rolagem caso a tela seja pequena) */
+}
+
+/* =========================================
+   ESTRUTURA PRINCIPAL (GRID)
+   ========================================= */
+.wired-nav {
+  background-color: var(--card-bg);
+  border-bottom: 4px solid var(--border-dark);
+  padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+
+.main-grid {
+  display: grid;
+  grid-template-columns: 350px 1fr 300px; /* Mantive sua excelente estrutura de 3 colunas */
+  gap: 25px;
+  padding: 25px;
+  height: calc(100vh - 80px);
+  box-sizing: border-box;
+}
+
+/* Os antigos "columns" agora são blocos retrô (Cards) */
+.column {
+  background-color: var(--card-bg);
+  border: 4px solid var(--border-dark);
+  box-shadow: 8px 8px 0px 0px rgba(0, 0, 0, 1);
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* =========================================
+   COMPONENTES INTERNOS
+   ========================================= */
+.header-col {
+  background-color: var(--border-dark);
+  color: #fff;
+  padding: 10px;
+  font-size: 12px;
+  text-align: center;
+  margin-bottom: 25px;
+  text-transform: uppercase;
+}
+
+.balance-val {
+  font-size: 24px;
+  color: var(--money-green);
+  text-align: center;
+  margin: 30px 0;
+  text-shadow: 2px 2px 0px #000; /* Sombra sólida no texto do saldo */
+}
+
+/* O Guaxinim - Removido o filtro verde/sepia */
+.mascote-wired {
+  width: 120px;
+  display: block;
+  margin: 0 auto 20px;
+  border: 4px solid var(--border-dark);
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+  background-color: var(--light-gray);
+}
+
+/* Lista de Transações (Entradas/Saídas) */
+.t-item {
+  border: 4px solid var(--border-dark);
+  background-color: var(--light-gray);
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+  margin-bottom: 15px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.t-item.entrada {
+  border-left: 8px solid var(--money-green);
+}
+
+.t-item.saida {
+  border-left: 8px solid var(--expense-red);
+}
+
+/* Botões de Ação */
+.btn-action {
+  background-color: var(--action-color);
+  color: var(--text-main);
+  border: 4px solid var(--border-dark);
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+  padding: 15px;
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  transition: all 0.1s;
+}
+
+.btn-action:active {
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 1);
+  transform: translate(4px, 4px);
+}
+
+/* =========================================
+   MODAIS (Pop-ups de Cadastro)
+   ========================================= */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: var(--card-bg);
+  border: 4px solid var(--border-dark);
+  box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 1);
+  padding: 30px;
+  width: 450px;
+  max-width: 90%;
+}
+
+.modal-input {
+  width: 100%;
+  background-color: #fff;
+  border: 4px solid var(--border-dark);
+  padding: 12px;
+  margin-bottom: 20px;
+  font-family: inherit;
+  font-size: 10px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.modal-input:focus {
+  background-color: #e0f7fa;
+}
+
+.btn-confirm {
+  background-color: var(--money-green);
+  color: #fff;
+  border: 4px solid var(--border-dark);
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+  padding: 15px;
+  width: 100%;
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.btn-confirm:active {
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 1);
+  transform: translate(4px, 4px);
+}
+
+.btn-cancel {
+  background-color: transparent;
+  color: var(--expense-red);
+  border: none;
+  text-decoration: underline;
+  padding: 10px;
+  width: 100%;
+  font-family: inherit;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.btn-cancel:hover {
+  color: #000;
+}

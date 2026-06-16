@@ -1,3 +1,9 @@
 backend/node_modules/
+frontend-novo/node_modules/
+node_modules/
+frontend-novo/dist/
+backend/dist/
 backend/database.sqlite
+backend/database.sqlite-shm
+backend/database.sqlite-wal
 .env

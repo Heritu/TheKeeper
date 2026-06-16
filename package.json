@@ -1,0 +1,17 @@
+{
+  "name": "the-keeper",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "npm --prefix frontend-novo run build && npm --prefix backend run build",
+    "check": "npm --prefix backend run build && npm --prefix frontend-novo run build && npm --prefix frontend-novo run lint",
+    "smoke": "powershell -ExecutionPolicy Bypass -File scripts/smoke-apresentacao.ps1",
+    "start": "npm --prefix backend run start",
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend-novo run dev"
+  },
+  "dependencies": {
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6"
+  }
+}

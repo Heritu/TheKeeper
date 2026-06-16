@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Keeper // Acesso e Cadastro</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background-color: #2b2b2b;
+        font-family: "Press Start 2P", cursive;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        color: #000;
+      }
+
+      .pixel-card {
+        background: #fff;
+        border: 4px solid #000;
+        box-shadow: 8px 8px 0px 0px rgba(0, 0, 0, 1);
+        padding: 30px;
+        width: 480px;
+        max-width: 90%;
+      }
+
+      .pixel-title {
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 14px;
+        text-transform: uppercase;
+        color: #000;
+      }
+
+      .pixel-input {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border: 4px solid #000;
+        font-family: "Press Start 2P", cursive;
+        font-size: 10px;
+        box-sizing: border-box;
+        outline: none;
+      }
+
+      .pixel-input:focus {
+        background-color: #e0f7fa;
+      }
+
+      .radio-group {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        border: 4px solid #000;
+        padding: 10px;
+        background-color: #f0f0f0;
+      }
+
+      .radio-label {
+        font-size: 10px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .pixel-btn {
+        width: 100%;
+        padding: 15px;
+        border: 4px solid #000;
+        font-family: "Press Start 2P", cursive;
+        font-size: 12px;
+        cursor: pointer;
+        box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+        transition: all 0.1s;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+      }
+
+      .btn-start {
+        background-color: #4caf50;
+        color: white;
+      }
+      .btn-create {
+        background-color: #ffcc00;
+        color: black;
+      }
+      .btn-secondary {
+        background-color: #e0e0e0;
+        color: black;
+      }
+
+      .pixel-btn:active {
+        box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 1);
+        transform: translate(4px, 4px);
+      }
+
+      .pixel-text {
+        font-size: 9px;
+        text-align: center;
+        margin-top: 15px;
+        line-height: 1.8;
+      }
+      .pixel-link {
+        color: #d32f2f;
+        cursor: pointer;
+        text-decoration: underline;
+      }
+      .pixel-link:hover {
+        color: #000;
+      }
+
+      .hidden {
+        display: none !important;
+      }
+      .step-indicator {
+        font-size: 8px;
+        text-align: center;
+        color: #666;
+        margin-bottom: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="login-container" class="pixel-card">
+      <div class="pixel-title">ACESSO AO SISTEMA</div>
+
+      <input
+        type="email"
+        id="l-email"
+        class="pixel-input"
+        placeholder="SEU EMAIL"
+      />
+      <input
+        type="password"
+        id="l-pass"
+        class="pixel-input"
+        placeholder="SUA SENHA"
+      />
+
+      <button class="pixel-btn btn-start" onclick="login()">ENTRAR</button>
+
+      <p class="pixel-text">
+        <span onclick="abrirCadastro()" class="pixel-link"
+          >CRIAR NOVA CONTA</span
+        >
+      </p>
+    </div>
+
+    <div id="reg-container" class="pixel-card hidden">
+      <div class="pixel-title">CRIAR NOVA CONTA</div>
+
+      <div id="reg-step-1">
+        <div class="step-indicator">PASSO 1 DE 2: IDENTIFICAÇÃO</div>
+
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="tipo_conta" value="pessoal" checked />
+            PESSOAL
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="tipo_conta" value="empresarial" />
+            EMPRESARIAL
+          </label>
+        </div>
+
+        <input
+          type="text"
+          id="r-nome"
+          class="pixel-input"
+          placeholder="IDENTIFICADOR / NOME DA CONTA"
+        />
+
+        <select class="pixel-input" disabled>
+          <option>MOEDA: REAL (R$)</option>
+        </select>
+
+        <button class="pixel-btn btn-create" onclick="irParaPasso2()">
+          CONTINUAR...
+        </button>
+        <p class="pixel-text">
+          <span onclick="voltarLogin()" class="pixel-link">VOLTAR</span>
+        </p>
+      </div>
+
+      <div id="reg-step-2" class="hidden">
+        <div class="step-indicator">PASSO 2 DE 2: CREDENCIAIS</div>
+
+        <input
+          type="email"
+          id="r-email"
+          class="pixel-input"
+          placeholder="SEU EMAIL"
+        />
+        <input
+          type="password"
+          id="r-pass"
+          class="pixel-input"
+          placeholder="SENHA"
+        />
+        <input
+          type="password"
+          id="r-pass-conf"
+          class="pixel-input"
+          placeholder="CONFIRME SUA SENHA"
+        />
+
+        <div style="font-size: 8px; color: #666; margin-bottom: 15px">
+          * Mínimo de 6 caracteres.<br />
+          * Ao cadastrar, você concorda com as políticas.
+        </div>
+
+        <button class="pixel-btn btn-start" onclick="registrar()">
+          CRIAR CONTA
+        </button>
+        <button class="pixel-btn btn-secondary" onclick="voltarPasso1()">
+          VOLTAR
+        </button>
+      </div>
+    </div>
+
+    <script>
+      // ==========================================
+      // FUNÇÕES DE NAVEGAÇÃO DA TELA
+      // ==========================================
+      function abrirCadastro() {
+        document.getElementById("login-container").classList.add("hidden");
+        document.getElementById("reg-container").classList.remove("hidden");
+        voltarPasso1();
+      }
+
+      function voltarLogin() {
+        document.getElementById("reg-container").classList.add("hidden");
+        document.getElementById("login-container").classList.remove("hidden");
+      }
+
+      function irParaPasso2() {
+        const nome = document.getElementById("r-nome").value;
+        if (!nome)
+          return alert("Por favor, preencha o seu nome/identificador.");
+
+        document.getElementById("reg-step-1").classList.add("hidden");
+        document.getElementById("reg-step-2").classList.remove("hidden");
+      }
+
+      function voltarPasso1() {
+        document.getElementById("reg-step-2").classList.add("hidden");
+        document.getElementById("reg-step-1").classList.remove("hidden");
+      }
+
+      // ==========================================
+      // FUNÇÕES DE COMUNICAÇÃO COM O SERVIDOR
+      // ==========================================
+      async function login() {
+        const res = await fetch("/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: document.getElementById("l-email").value,
+            senha: document.getElementById("l-pass").value,
+          }),
+        });
+        const data = await res.json();
+        if (data.success) {
+          localStorage.setItem("keeper_user", data.userId);
+          localStorage.setItem("keeper_tipo", data.tipoConta);
+          location.href = "/dashboard";
+        } else {
+          alert("Acesso Negado. Verifique suas credenciais.");
+        }
+      }
+
+      async function registrar() {
+        try {
+          console.log("Iniciando processo de cadastro...");
+
+          const nome = document.getElementById("r-nome").value;
+          const email = document.getElementById("r-email").value;
+          const pass = document.getElementById("r-pass").value;
+          const passConf = document.getElementById("r-pass-conf").value;
+
+          if (!nome || !email || !pass) {
+            return alert("Por favor, preencha todos os campos!");
+          }
+
+          if (pass !== passConf) {
+            return alert("As senhas não coincidem!");
+          }
+
+          const tipoRadio = document.querySelector(
+            'input[name="tipo_conta"]:checked',
+          );
+          const tipoSelecionado = tipoRadio ? tipoRadio.value : "pessoal";
+
+          const res = await fetch("/registrar", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              tipo_conta: tipoSelecionado,
+              nome: nome,
+              email: email,
+              senha: pass,
+            }),
+          });
+
+          const data = await res.json();
+
+          if (data.success) {
+            alert("Conta criada com sucesso! Faça o login.");
+            voltarLogin(); // <-- A função que estava faltando!
+          } else {
+            alert(
+              "Erro vindo do servidor: " +
+                (data.error || "Tente usar outro email."),
+            );
+          }
+        } catch (erro) {
+          alert("Erro no seu navegador: " + erro.message);
+          console.error("Detalhes do erro:", erro);
+        }
+      }
+    </script>
+  </body>
+</html>
