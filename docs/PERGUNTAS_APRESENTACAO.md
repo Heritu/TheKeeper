@@ -108,13 +108,13 @@ Sim. Na tela de lançamentos, o usuário escolhe o mês do histórico e clica em
 
 O backend fica na pasta `backend`.
 
-### Qual e o arquivo principal do backend?
+### Quais são os arquivos principais do backend?
 
-O arquivo principal e `backend/src/server.ts`.
+`backend/src/server.ts` inicia o processo, enquanto `backend/src/app.ts` monta o Express e conecta as rotas.
 
 ### O que tem no `server.ts`?
 
-Ele cria o servidor Express, configura rotas, valida dados, executa regras de negocio, serve o frontend e trata erros.
+Ele abre o banco, inicia o servidor HTTP e trata o encerramento. As rotas ficam separadas por domínio em `backend/src/routes`.
 
 ### Onde o banco e configurado?
 
@@ -182,7 +182,7 @@ Significa que a senha foi processada com o algoritmo `scrypt`, usando salt e has
 
 ### Onde a senha é criptografada?
 
-No backend, em `backend/src/server.ts`, nas funções relacionadas a `hashSenha`, `scryptAsync` e `verificarSenha`.
+No backend, em `backend/src/utils/security.ts`, nas funções relacionadas a `hashSenha`, `scryptAsync` e `verificarSenha`.
 
 ### O sistema usa JWT?
 
@@ -256,13 +256,15 @@ O backend agrupa as movimentações por mês, separando entradas, saídas e resu
 
 Abra primeiro:
 
-- `backend/src/server.ts`
+- `backend/src/app.ts`
+- `backend/src/routes/auth.ts`
+- `backend/src/routes/movimentacoes.ts`
 - `backend/src/database.ts`
 - `frontend-novo/src/api.ts`
 
 ### Onde mostrar as rotas da API?
 
-Em `backend/src/server.ts`, perto do final do arquivo, onde aparecem chamadas como `app.get`, `app.post`, `app.put` e `app.delete`.
+Em `backend/src/app.ts` é possível ver os grupos; os métodos de cada endpoint ficam nos arquivos de `backend/src/routes`.
 
 ### Onde mostrar as tabelas do banco?
 
@@ -274,11 +276,11 @@ Em `backend/src/database.ts`, na criação da tabela `usuarios`, onde o campo `e
 
 ### Onde mostrar o cadastro?
 
-No backend, mostre a funcao `registrar`. No frontend, mostre `Login.tsx`, que chama `cadastrar`.
+No backend, mostre `backend/src/routes/auth.ts`. No frontend, mostre `Login.tsx`, que chama `cadastrar`.
 
 ### Onde mostrar o login?
 
-No backend, mostre a funcao `login`. No frontend, mostre a funcao `login` em `frontend-novo/src/api.ts`.
+No backend, mostre `backend/src/routes/auth.ts`. No frontend, mostre a função `login` em `frontend-novo/src/api.ts`.
 
 ## Testes
 
@@ -326,7 +328,7 @@ Porque o foco do MVP foi entregar os principais fluxos financeiros funcionando b
 
 ### Se perguntarem onde está o backend
 
-O backend está em `backend/src/server.ts`, com as rotas e regras de negócio, e em `backend/src/database.ts`, com a estrutura do banco.
+O backend inicia em `backend/src/server.ts`, monta a aplicação em `backend/src/app.ts`, separa as regras em `backend/src/routes` e define o banco em `backend/src/database.ts`.
 
 ### Se perguntarem onde está o frontend
 
